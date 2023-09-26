@@ -1,10 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
+from PIL import Image, ImageTk
 import customtkinter
-
-customtkinter.set_appearance_mode("System")
-customtkinter.set_default_color_theme("green")
-
 def show_play_screen():
     play_frame.pack()
     main_frame.pack_forget()
@@ -14,34 +11,52 @@ def show_main_screen():
     play_frame.pack_forget()
 
 def start_clicked():
-    print("Start button clicked")
+    print("")
 
 def end_clicked():
-    print("End button clicked")
+    print("")
 
 def show_clicked():
-    print("Show button clicked")
+    print("")
 
 app = tk.Tk()
 app.title("Two Screens")
 app.geometry("800x600")
 app.resizable(False, False)
 
-# Main Screen (Next Button)
+# Main Screen
 main_frame = tk.Frame(app, width=800, height=600)
 main_frame.pack()
 
 # Create a Canvas to draw the gradient background
-canvas = tk.Canvas(main_frame, width=800, height=300, bg="red")
+canvas = tk.Canvas(main_frame, width=800, height=160, bg="red")
 canvas.pack()
 
 # Create a white background for the bottom half
-bottom_frame = tk.Frame(main_frame, width=800, height=300, bg="white")
+bottom_frame = tk.Frame(main_frame, width=800, height=440, bg="white")
 bottom_frame.pack()
 
-# Create a button with text "Next" and custom style
-next_button = ttk.Button(main_frame, text="Next", style="TButton", command=show_play_screen)
-next_button.place(relx=0.5, rely=0.5, anchor=tk.CENTER, width=400, height=30)
+# Create an image button instead of text button
+image = Image.open("face.jpg")  # Replace with your image file path
+image = image.resize((400, 296))  # Resize the image as needed
+photo = ImageTk.PhotoImage(image)
+
+next_button = tk.Button(main_frame, image=photo, bd=0, command=show_play_screen)
+next_button.photo = photo
+next_button.place(relx=0.5, rely=0.55, anchor=tk.CENTER, width=400, height=290)
+
+# Add an image to the top left corner
+image = Image.open("ptit.png")  # Replace with your image file path
+image = image.resize((100, 100))  # Resize the image as needed
+photo = ImageTk.PhotoImage(image)
+image_label = tk.Label(main_frame, image=photo)
+image_label.photo = photo
+image_label.place(relx=0.05, rely=0.05, anchor=tk.NW)
+
+# Text above the image (centered horizontally)
+font_title = customtkinter.CTkFont(family="Montserrat", size=25, weight= "bold")
+text_label = tk.Label(main_frame, text="FACE RECOGNITION PTIT", font=font_title, fg="white", bg="red")
+text_label.place(relx=0.5, rely=0.1, anchor=tk.N)
 
 # Play Screen (Contains Start, End, Show Buttons)
 play_frame = tk.Frame(app, bg="red", width=800, height=600)
