@@ -75,6 +75,11 @@ canvas.pack()
 bottom_frame = tk.Frame(play_frame, width=800, height=550, bg="white")
 bottom_frame.pack()
 
+#App title ở màn hình 2
+font_title = customtkinter.CTkFont(family="Montserrat", size=12, weight= "bold")
+text_label = tk.Label(play_frame, text="Face Recognition PTIT", font=font_title, fg="white", bg="red")
+text_label.place(relx=0.16, rely=0.025, anchor=tk.N)
+
 #Start Button
 image = Image.open("scan.jpg")  # Replace with your image file path
 image = image.resize((800, 300))  # Resize the image as needed
@@ -83,7 +88,7 @@ back_button = tk.Button(play_frame, image=photo, command=start_clicked)
 back_button.photo = photo
 back_button.place(relx=0, rely=0.08, width=800, height=300)
 
-add_path_button = ttk.Button(play_frame, text="Thêm lớp học", style="TButton", command=add_path)
+add_path_button = ttk.Button(play_frame, text="Thêm lớp học", style="Custom.TButton", command=add_path)
 end_button = ttk.Button(play_frame, text="End", style="TButton", command=end_clicked)
 show_button = ttk.Button(play_frame, text="Show", style="TButton", command=show_clicked)
 # Back Button
@@ -97,11 +102,14 @@ back_button.place(relx=0.01, rely=0.01, anchor="nw", width=40, height=40)
 
 style = ttk.Style()
 style.configure("TButton",
-                font=("Helvetica", 14),
+                font=("Montserrat", 14),
                 background="#44475a",
                 foreground="black")
-
-add_path_button.place(relx=0.2, rely=0.04, anchor=tk.CENTER)
+style.configure("Custom.TButton",
+                font=("Montserrat", 10),
+                background="red",
+                foreground="black")  # Màu chữ trắng
+add_path_button.place(relx=0.9, rely=0.04, anchor=tk.CENTER)
 end_button.place(relx=0.5, rely=0.75, anchor=tk.CENTER)
 show_button.place(relx=0.5, rely=0.8, anchor=tk.CENTER)
 
